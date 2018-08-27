@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Bussiness.Logic;
+using Bussiness.Logic.Clientes;
+using UI.Desktop.Clientes;
 
 namespace UI.Desktop
 {
@@ -31,18 +33,20 @@ namespace UI.Desktop
             }
         }
 
-        public Iniciador _Iniciador { get; set; }
-        public Iniciador Iniciador
-        {
+        public ClienteLogic _CliLogic { get; set; }
+        public ClienteLogic CliLogic {
             get
             {
-                if(_Iniciador == null)
-                {
-                    _Iniciador = new Iniciador();
-                }
+                if (_CliLogic == null)
+                    _CliLogic = new ClienteLogic();
 
-                return _Iniciador;
+                return _CliLogic;
             }
+        }
+
+        public void OpenForm(Form pForm)
+        {
+            pForm.ShowDialog();
         }
     }
 }

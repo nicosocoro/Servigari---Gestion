@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IngresoLogic.cs" />
-    <Compile Include="Iniciador.cs" />
+    <Compile Include="Clientes\ClienteLogic.cs" />
+    <Compile Include="Registros\IngresoLogic.cs" />
     <Compile Include="LogicBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

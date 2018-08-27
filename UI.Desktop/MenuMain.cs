@@ -7,33 +7,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UI.Desktop.Clientes;
 
 namespace UI.Desktop
 {
-    public partial class Main : Form1
+    public partial class MenuMain: Form1
     {
-        public Main()
-        {            
+        public MenuMain()
+        {
             InitializeComponent();
-            Iniciador.CheckNodeTipo();
         }
 
-        private void OpenForm(Form pForm)
-        {
-            pForm.ShowDialog();
-        }
+        
 
 
         //---------FORM INGRESOS---------
-        private void btnIngreso_Click(object sender, EventArgs e)
+        private void btnIngresos_Click(object sender, EventArgs e)
         {
             OpenIngresosForm();
         }
 
-        private void ingresosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenIngresosForm();
-        }
+        //private void ingresosToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    OpenIngresosForm();
+        //}
 
         private void OpenIngresosForm()
         {
@@ -42,21 +39,33 @@ namespace UI.Desktop
         }
 
 
-        //---------FORM GASTOS---------
+        #region Form Gastos
         private void btnGastos_Click(object sender, EventArgs e)
         {
             OpenGastosForm();
         }
 
-        private void gastosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenGastosForm();
-        }
+        //private void gastosToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    OpenGastosForm();
+        //}
 
         private void OpenGastosForm()
         {
             Gastos gastos = new Gastos();
             OpenForm(gastos);
+        }
+        #endregion
+
+        private void OpenClientesForm()
+        {
+            MainClientes mainClientes = new MainClientes();
+            OpenForm(mainClientes);
+        }
+
+        private void btnClientes_Click(object sender, EventArgs e)
+        {
+            OpenClientesForm();
         }
     }
 }

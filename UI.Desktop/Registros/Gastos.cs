@@ -87,8 +87,18 @@ namespace UI.Desktop
                 montoEntity.ID = int.Parse(dgvGastos.SelectedCells[0].Value.ToString());
             }
 
-            IngLogic.Save(montoEntity, Utiles.AccionEnum.TipoAccion.Delete);
-            ListarGastos();
+            DialogResult dr = MessageBox.Show("¿Estás seguro de borrar este registro? No podrá deshacerlo luego", "¿Estás seguro?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+
+            switch (dr)
+            {
+                case DialogResult.Yes:
+                    IngLogic.Save(montoEntity, Utiles.AccionEnum.TipoAccion.Delete);
+                    ListarGastos();
+                    break;
+
+                case DialogResult.Cancel:
+                    break;
+            }
         }
 
         private void btnVolverGasto_Click(object sender, EventArgs e)
@@ -119,6 +129,16 @@ namespace UI.Desktop
 
                 this.ddlTipo.DataSource = IngLogic.GetTipos(true);
             }
+        }
+
+        private void lblTittleGasto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvGastos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

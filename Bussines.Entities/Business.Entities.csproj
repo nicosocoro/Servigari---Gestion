@@ -40,11 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MontoEntities.cs" />
+    <Compile Include="Clientes\ClientesEntity.cs" />
+    <Compile Include="Registros\MontoEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RecordEntity.cs" />
-    <Compile Include="Type.cs" />
-    <Compile Include="TypeEntity.cs" />
+    <Compile Include="Registros\RecordEntity.cs" />
+    <Compile Include="Registros\Type.cs" />
+    <Compile Include="Registros\TypeEntity.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

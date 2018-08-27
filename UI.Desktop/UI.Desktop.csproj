@@ -45,28 +45,46 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgregarTipo.cs">
+    <Compile Include="Clientes\DatosCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AgregarTipo.Designer.cs">
+    <Compile Include="Clientes\DatosCliente.Designer.cs">
+      <DependentUpon>DatosCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Clientes\MainClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clientes\MainClientes.Designer.cs">
+      <DependentUpon>MainClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuMain.Designer.cs">
+      <DependentUpon>MenuMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registros\AgregarTipo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registros\AgregarTipo.Designer.cs">
       <DependentUpon>AgregarTipo.cs</DependentUpon>
     </Compile>
-    <Compile Include="BorrarTipo.cs">
+    <Compile Include="Registros\BorrarTipo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BorrarTipo.Designer.cs">
+    <Compile Include="Registros\BorrarTipo.Designer.cs">
       <DependentUpon>BorrarTipo.cs</DependentUpon>
     </Compile>
-    <Compile Include="CalcularTotal.cs">
+    <Compile Include="Registros\CalcularTotal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CalcularTotal.Designer.cs">
+    <Compile Include="Registros\CalcularTotal.Designer.cs">
       <DependentUpon>CalcularTotal.cs</DependentUpon>
     </Compile>
-    <Compile Include="CambiarDatos.cs">
+    <Compile Include="Registros\CambiarDatos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CambiarDatos.Designer.cs">
+    <Compile Include="Registros\CambiarDatos.Designer.cs">
       <DependentUpon>CambiarDatos.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
@@ -75,46 +93,46 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gastos.cs">
+    <Compile Include="Registros\Gastos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gastos.Designer.cs">
+    <Compile Include="Registros\Gastos.Designer.cs">
       <DependentUpon>Gastos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ingresos.cs">
+    <Compile Include="Registros\Ingresos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Ingresos.Designer.cs">
+    <Compile Include="Registros\Ingresos.Designer.cs">
       <DependentUpon>Ingresos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Main.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AgregarTipo.resx">
+    <EmbeddedResource Include="Clientes\DatosCliente.resx">
+      <DependentUpon>DatosCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Clientes\MainClientes.resx">
+      <DependentUpon>MainClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuMain.resx">
+      <DependentUpon>MenuMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registros\AgregarTipo.resx">
       <DependentUpon>AgregarTipo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BorrarTipo.resx">
+    <EmbeddedResource Include="Registros\BorrarTipo.resx">
       <DependentUpon>BorrarTipo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CalcularTotal.resx">
+    <EmbeddedResource Include="Registros\CalcularTotal.resx">
       <DependentUpon>CalcularTotal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CambiarDatos.resx">
+    <EmbeddedResource Include="Registros\CambiarDatos.resx">
       <DependentUpon>CambiarDatos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gastos.resx">
+    <EmbeddedResource Include="Registros\Gastos.resx">
       <DependentUpon>Gastos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ingresos.resx">
+    <EmbeddedResource Include="Registros\Ingresos.resx">
       <DependentUpon>Ingresos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -157,6 +175,11 @@
       <Project>{5bf31769-eb4f-4fa6-978a-9de8a681f25a}</Project>
       <Name>Utiles</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Archivos\Gastos.xml" />
+    <Content Include="Archivos\Ingresos.xml" />
+    <Content Include="Archivos\TipoIngresos.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

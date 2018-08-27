@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Database;
 using Bussines.Entities;
-using System.Data;
 
-namespace Bussiness.Logic
+namespace Bussiness.Logic.Clientes
 {
-    public class Iniciador: LogicBase
+    public class ClienteLogic: LogicBase
     {
+        //public ClientesEntity GetCliente(int ID)
+        //{
 
+        //}
     }
 }

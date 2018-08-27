@@ -33,7 +33,7 @@ namespace UI.Desktop
 
         private void btnAgregarIngreso_Click(object sender, EventArgs e)
         {
-            string error = ""; 
+            string error = "";
 
             MontoEntities montoEntity = new MontoEntities(TipoMonto.Ingreso);
             Utiles.AccionEnum.TipoAccion tipoAccion = Utiles.AccionEnum.TipoAccion.Add;
@@ -49,7 +49,7 @@ namespace UI.Desktop
                 error += "Seleccione otro Tipo";
             }
 
-            if(error == "")
+            if (error == "")
             {
                 IngLogic.Save(montoEntity, tipoAccion);
 
@@ -75,7 +75,7 @@ namespace UI.Desktop
                 montoEntity.Descripcion = dgvIngresos.SelectedCells[1].Value.ToString();
                 montoEntity.Tipo = dgvIngresos.SelectedCells[4].Value.ToString();
                 montoEntity.Monto = dgvIngresos.SelectedCells[2].Value.ToString();
-                
+
                 CambiarDatos cambiarDatos = new CambiarDatos(montoEntity);
                 cambiarDatos.ShowDialog();
 
@@ -87,18 +87,28 @@ namespace UI.Desktop
         {
             MontoEntities montoEntity = new MontoEntities(TipoMonto.Ingreso);
 
-            if(dgvIngresos.SelectedRows.Count > 0)
+            if (dgvIngresos.SelectedRows.Count > 0)
             {
                 montoEntity.ID = int.Parse(dgvIngresos.SelectedCells[0].Value.ToString());
             }
 
-            IngLogic.Save(montoEntity, Utiles.AccionEnum.TipoAccion.Delete);
-            ListarIngresos();
+            DialogResult dr = MessageBox.Show("¿Estás seguro de borrar este registro? No podrá deshacerlo luego", "¿Estás seguro?",  MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+
+            switch(dr)
+            {
+                case DialogResult.Yes:
+                    IngLogic.Save(montoEntity, Utiles.AccionEnum.TipoAccion.Delete);
+                    ListarIngresos();
+                    break;
+
+                case DialogResult.Cancel:
+                    break;
+            }
         }
 
         private void btnActualizarIngresos_Click(object sender, EventArgs e)
         {
-           this.ListarIngresos();
+            this.ListarIngresos();
         }
 
         private void CambiarDatos_FormClosing(object sender, FormClosedEventArgs e)
@@ -137,7 +147,7 @@ namespace UI.Desktop
         }
 
         private void txtDescripcionIngreso_TextChanged(object sender, EventArgs e)
-        {       
+        {
         }
     }
 }

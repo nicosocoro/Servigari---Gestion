@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Database
+namespace Database.Clientes
 {
-    public class RecordAdapter
+    public class ClientesAdapter: ManejadorArchivo
     {
-
     }
 }

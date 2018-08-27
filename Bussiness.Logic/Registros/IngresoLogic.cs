@@ -11,21 +11,39 @@ namespace Bussiness.Logic
 {
     public class IngresoLogic: LogicBase
     {
+        #region Registros
         public DataTable GetIngresos()
         {
-            return Manejador.GetIngresos();
+            return RecordManejador.GetIngresos();
         }
 
         public DataTable GetGastos()
         {
-            return Manejador.GetGastos();
+            return RecordManejador.GetGastos();
+        }     
+
+        public void AddRowIngresos(MontoEntities montoEntity, string filePath)
+        {
+            RecordManejador.AdNuedRowIngresos(montoEntity, filePath);
         }
-    
+
+        public void ModifyRow(MontoEntities montoEntity, string filePath, string subPath)
+        {
+            RecordManejador.ModifyRow(montoEntity, filePath, subPath);
+        }
+
+        public void DeleteRow(int pIDEntity, string filePath, string subPath)
+        {
+            RecordManejador.DeleteRow(pIDEntity, filePath, subPath);
+        }
+        #endregion
+
+        #region Tipos
         public List<string> GetTipos(bool pFlag)
         {
-            List<string> listTipos = Manejador.GetTipos();
+            List<string> listTipos = TiposManejador.GetTipos();
 
-            if(pFlag)
+            if (pFlag)
             {
                 listTipos.Add("Agregar nuevo...");
                 listTipos.Add("Borrar existente...");
@@ -39,9 +57,9 @@ namespace Bussiness.Logic
             List<string> listTipos = this.GetTipos(false);
             string error = "";
 
-            foreach(string s in listTipos)
+            foreach (string s in listTipos)
             {
-                if(pDescripcion == s)
+                if (pDescripcion == s)
                 {
                     error = "Ya existe ese Tipo, ingrese otro";
                     break;
@@ -53,31 +71,16 @@ namespace Bussiness.Logic
 
         public void NuevoTipo(string pDescripcion)
         {
-            Manejador.NuevoTipo(pDescripcion);
+            TiposManejador.NuevoTipo(pDescripcion);
         }
 
         public void BorrarTipo(string pDescripcion)
         {
-            Manejador.BorrarTipo(pDescripcion);
+            TiposManejador.BorrarTipo(pDescripcion);
         }
+        #endregion
 
-        public void AddRowIngresos(MontoEntities montoEntity, string filePath)
-        {
-            Manejador.AdNuedRowIngresos(montoEntity, filePath);
-        }
-
-        public void ModifyRow(MontoEntities montoEntity, string filePath, string subPath)
-        {
-            Manejador.ModifyRow(montoEntity, filePath, subPath);
-        }
-
-        public void DeleteRow(int pIDEntity, string filePath, string subPath)
-        {
-            Manejador.DeleteRow(pIDEntity, filePath, subPath);
-        }
-        
-        //SAVE METHODS
-
+        #region SAVE METHODS
         public void Save(MontoEntities montoEntity, Utiles.AccionEnum.TipoAccion tipoAccion)
         {
             string filePath = "";
@@ -111,12 +114,13 @@ namespace Bussiness.Logic
                     break;
             }
         }
+        #endregion
 
-
-        //CALCULAR MONTO TOTAL
-        public int CalcularTotalMonto(int pMonth, string pYear, string pDescripcion, string pPath)
+        #region Utiles
+        public int CalcularTotalMonto(int pMonth, string pYear, string pTipo, string pPath)
         {
-            return Manejador.CalcularTotalMonto(pMonth, pYear, pDescripcion, pPath);
+            return RecordManejador.CalcularTotalMonto(pMonth, pYear, pTipo, pPath);
         }
+        #endregion  
     }
 }

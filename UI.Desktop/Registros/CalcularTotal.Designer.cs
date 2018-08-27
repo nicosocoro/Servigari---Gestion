@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             Bussiness.Logic.IngresoLogic ingresoLogic1 = new Bussiness.Logic.IngresoLogic();
-            Bussiness.Logic.Iniciador iniciador1 = new Bussiness.Logic.Iniciador();
             this.ddlMeses = new System.Windows.Forms.ComboBox();
             this.lblTittleCalculo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -183,11 +182,8 @@
             this.lblAño.Text = "Año";
             // 
             // CalcularTotal
-            // 
-            ingresoLogic1._Manejador = null;
+            //            
             this._IngLogic = ingresoLogic1;
-            iniciador1._Manejador = null;
-            this._Iniciador = iniciador1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(843, 233);

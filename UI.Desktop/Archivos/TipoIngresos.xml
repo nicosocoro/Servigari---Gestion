@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Tipos>
+  <Tipo>
+    <Descripcion>Local</Descripcion>
+  </Tipo>
+  <Tipo>
+    <Descripcion>Casa</Descripcion>
+  </Tipo>  
+  <Tipo>
+    <Descripcion>Calle</Descripcion>
+  </Tipo>
+</Tipos>
+
+<!-- C:\Users\Nico\source\repos\Servigari\Database\bin\Debug\TipoIngresos.xml -->
