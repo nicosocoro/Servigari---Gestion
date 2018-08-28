@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Bussiness.Logic.Clientes.ClienteLogic clienteLogic1 = new Bussiness.Logic.Clientes.ClienteLogic();
+            Bussiness.Logic.IngresoLogic ingresoLogic1 = new Bussiness.Logic.IngresoLogic();
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtCelAlternativo = new System.Windows.Forms.TextBox();
@@ -45,6 +47,7 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblTittle = new System.Windows.Forms.Label();
+            this.lblError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtDireccion
@@ -81,29 +84,31 @@
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.btnCancelar.Location = new System.Drawing.Point(553, 497);
+            this.btnCancelar.Location = new System.Drawing.Point(440, 510);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(256, 37);
+            this.btnCancelar.Size = new System.Drawing.Size(369, 37);
             this.btnCancelar.TabIndex = 54;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnAceptar
             // 
-            this.btnAceptar.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnAceptar.BackColor = System.Drawing.SystemColors.ControlDark;
             this.btnAceptar.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
             this.btnAceptar.FlatAppearance.BorderSize = 0;
             this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAceptar.ForeColor = System.Drawing.SystemColors.InactiveBorder;
-            this.btnAceptar.Location = new System.Drawing.Point(28, 497);
+            this.btnAceptar.Location = new System.Drawing.Point(28, 510);
             this.btnAceptar.Margin = new System.Windows.Forms.Padding(4);
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(256, 37);
+            this.btnAceptar.Size = new System.Drawing.Size(362, 37);
             this.btnAceptar.TabIndex = 53;
             this.btnAceptar.Text = "Agregar";
             this.btnAceptar.UseVisualStyleBackColor = false;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // txtComentarios
             // 
@@ -176,6 +181,7 @@
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(369, 26);
             this.txtApellido.TabIndex = 45;
+            this.txtApellido.TextChanged += new System.EventHandler(this.textbox_Changed);
             // 
             // label2
             // 
@@ -194,6 +200,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(362, 26);
             this.txtNombre.TabIndex = 43;
+            this.txtNombre.TextChanged += new System.EventHandler(this.textbox_Changed);
             // 
             // label1
             // 
@@ -217,11 +224,29 @@
             this.lblTittle.TabIndex = 59;
             this.lblTittle.Text = "Datos del Cliente";
             // 
-            // lblTitleClientes
+            // lblError
             // 
+            this.lblError.AutoSize = true;
+            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblError.Location = new System.Drawing.Point(23, 473);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(384, 25);
+            this.lblError.TabIndex = 60;
+            this.lblError.Text = "Debe completar los campos obligatorios (*)";
+            this.lblError.Visible = false;
+            // 
+            // DatosCliente
+            // 
+            clienteLogic1._RecordManejador = null;
+            clienteLogic1._TiposManejador = null;
+            this._CliLogic = clienteLogic1;
+            ingresoLogic1._RecordManejador = null;
+            ingresoLogic1._TiposManejador = null;
+            this._IngLogic = ingresoLogic1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(831, 552);
+            this.ClientSize = new System.Drawing.Size(831, 560);
+            this.Controls.Add(this.lblError);
             this.Controls.Add(this.lblTittle);
             this.Controls.Add(this.txtDireccion);
             this.Controls.Add(this.label7);
@@ -239,8 +264,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.label1);
-            this.Name = "lblTitleClientes";
-            this.Text = "DatosCliente";
+            this.Name = "DatosCliente";
+            this.Text = "Datos del cliente";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,5 +290,6 @@
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblTittle;
+        private System.Windows.Forms.Label lblError;
     }
 }

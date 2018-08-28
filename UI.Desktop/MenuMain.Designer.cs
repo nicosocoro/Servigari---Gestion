@@ -123,7 +123,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MenuMain";
-            this.Text = "MenuMain";
+            this.Text = "Menú principal";
             this.ResumeLayout(false);
             this.PerformLayout();
 

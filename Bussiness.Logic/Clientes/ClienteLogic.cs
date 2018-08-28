@@ -13,5 +13,12 @@ namespace Bussiness.Logic.Clientes
         //{
 
         //}
+
+        public int GetLastID()
+        {
+            return 1;
+        }
+
+        
     }
 }

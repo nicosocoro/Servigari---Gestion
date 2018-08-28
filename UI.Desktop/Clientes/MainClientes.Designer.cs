@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Bussiness.Logic.Clientes.ClienteLogic clienteLogic1 = new Bussiness.Logic.Clientes.ClienteLogic();
+            Bussiness.Logic.IngresoLogic ingresoLogic1 = new Bussiness.Logic.IngresoLogic();
             this.btnAgregarCliente = new System.Windows.Forms.Button();
             this.btnVolverCliente = new System.Windows.Forms.Button();
             this.btnEditarCliente = new System.Windows.Forms.Button();
@@ -155,6 +157,12 @@
             // 
             // MainClientes
             // 
+            clienteLogic1._RecordManejador = null;
+            clienteLogic1._TiposManejador = null;
+            this._CliLogic = clienteLogic1;
+            ingresoLogic1._RecordManejador = null;
+            ingresoLogic1._TiposManejador = null;
+            this._IngLogic = ingresoLogic1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(992, 499);
@@ -165,7 +173,7 @@
             this.Controls.Add(this.lblTitleListado);
             this.Controls.Add(this.dgvClientes);
             this.Name = "MainClientes";
-            this.Text = "MainClientes";
+            this.Text = "Listado clientes";
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
