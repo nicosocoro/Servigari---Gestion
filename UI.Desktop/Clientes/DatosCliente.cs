@@ -69,25 +69,30 @@ namespace UI.Desktop.Clientes
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (btnHabilitado)
+            try
             {
-                ClientesEntity cli = new ClientesEntity();
+                if (btnHabilitado)
+                {
+                    ClientesEntity cli = new ClientesEntity();
 
-                cli.ID = cliLogic.GetLastID();
-                cli.Nombre = txtNombre.Text;
-                cli.Apellido = txtApellido.Text;
-                cli.Direccion = txtDireccion.Text;
-                cli.TelefonoFijo = txtFijo.Text;
-                cli.TelefonoCeluar = txtCelular.Text;
-                cli.TelefonoAlternativo = txtCelAlternativo.Text;
-                cli.Comentarios = txtComentarios.Text;
-                cli.FechaAlta = DateTime.Now;
+                    //cli.ID = cliLogic.GetLastID();
+                    cli.Nombre = txtNombre.Text;
+                    cli.Apellido = txtApellido.Text;
+                    cli.Direccion = txtDireccion.Text;
+                    cli.TelefonoFijo = txtFijo.Text;
+                    cli.TelefonoCeluar = txtCelular.Text;
+                    cli.TelefonoAlternativo = txtCelAlternativo.Text;
+                    cli.Comentarios = txtComentarios.Text;
+                    cli.FechaAlta = DateTime.Now;
 
-                lblError.Visible = true;
-                lblError.Text = cli.Comentarios;
+                    cliLogic.Save(cli, Utiles.AccionEnum.TipoAccion.Add);
+                }
             }
-            else
-                lblError.Visible = true;
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
