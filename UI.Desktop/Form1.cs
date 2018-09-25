@@ -47,9 +47,10 @@ namespace UI.Desktop
         #region Colores        
         public Color azul = Color.FromArgb(58, 58, 255);
         public Color blanco = Color.FromArgb(255, 255, 255);
+        public Color negro = Color.FromArgb(0, 0, 0);
         public Color gris_deshabilitado = Color.FromArgb(130, 120, 135);
         public Color rojo_error = Color.FromArgb(255, 0, 0);
-        Color grisOscuro = Color.DarkGray;
+        public Color grisOscuro = Color.DarkGray;
         #endregion
 
         #region Funciones
@@ -61,6 +62,11 @@ namespace UI.Desktop
         public void OpenForm(Form pForm)
         {
             pForm.ShowDialog();
+        }
+
+        public void CloseForm(Form pForm)
+        {
+            pForm.Close();
         }
 
         /// <summary>
@@ -86,12 +92,20 @@ namespace UI.Desktop
         /// Aplica los estilos a botón en estado habilitado
         /// </summary>
         /// <param name="btn"></param>
+        /// 
         public void btn_Habilitado(Button btn)
         {
             btnHabilitado = true;
+            btn.Enabled = true;
 
             btn.BackColor = azul;
             btn.ForeColor = blanco;
+        }
+
+        public void btn_Habilitado(List<Button> oLista)
+        {
+            foreach (Button btn in oLista)
+                btn_Habilitado(btn);
         }
 
         /// <summary>
@@ -101,9 +115,16 @@ namespace UI.Desktop
         public void btn_Inhabilitado(Button btn)
         {
             btnHabilitado = false;
+            btn.Enabled = false;
 
             btn.ForeColor = gris_deshabilitado;
             btn.BackColor = grisOscuro;
+        }
+
+        public void btn_Inhabilitado(List<Button> oLista)
+        {
+            foreach (Button btn in oLista)
+                btn_Inhabilitado(btn);
         }
 
 

@@ -83,6 +83,11 @@
       <Name>Business.Entities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Archivos\Clientes.xml" />
+    <Content Include="Archivos\Gastos.xml" />
+    <Content Include="Archivos\Ingresos.xml" />
+    <Content Include="Archivos\TipoIngresos.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

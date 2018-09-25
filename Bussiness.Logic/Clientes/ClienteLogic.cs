@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,18 +21,47 @@ namespace Bussiness.Logic.Clientes
 
                 return _cliAdapter;
             }
+
+            set
+            {
+                _cliAdapter = value;
+            }
         }
 
-        //public ClientesEntity GetCliente(int ID)
-        //{
-
-        //}
-
-        //public void Save()
-
-        public int GetLastID()
+        public ClientesEntity GetCliente_ID(string oID)
         {
-            return 1;
+            ClientesEntity cli = new ClientesEntity();
+            DataTable dtClientes = ClienteAdapter.GetClientes();
+
+            foreach (DataRow dr in dtClientes.Rows)
+            {
+                if (dr["ID"].ToString() == oID)
+                {
+                    cli.ID = oID;
+                    cli.Nombre = dr[1].ToString();
+                    cli.Apellido = dr[2].ToString();
+                    cli.TelefonoFijo = dr[3].ToString();
+                    cli.TelefonoCelular = dr[4].ToString();
+                    cli.TelefonoAlternativo = dr[5].ToString();
+                    cli.Direccion = dr[6].ToString();
+                    cli.Comentarios = dr[7].ToString();
+                    cli.FechaAlta = dr[8].ToString();
+
+                    return cli;
+                }
+            }
+
+            throw new Exception("No existe ningún cliente registrado con el ID " + oID);
+        }
+
+        public DataTable GetClientes()
+        {
+            return ClienteAdapter.GetClientes();
+        }
+
+        public string GetLastID()
+        {
+            return ClienteAdapter.GetLastID();
         }
 
         #region METODOS SAVE
@@ -52,22 +82,27 @@ namespace Bussiness.Logic.Clientes
                     break;
 
                 default:
-                    throw new Exception("Error en acceso para recuperar datos de la base de datos. Contacte con sistemas.");                   
+                    throw new Exception("Error en acceso para recuperar datos de la base de datos. Contacte con sistemas.");
 
             }
         }
 
-        public void Add(ClientesEntity oCliente)
+        public void Save(string oID)
+        {
+            Delete(oID);
+        }
+
+        private void Add(ClientesEntity oCliente)
         {
             ClienteAdapter.Add(oCliente);
         }
 
-        public void Modify(ClientesEntity oCliente)
+        private void Modify(ClientesEntity oCliente)
         {
             ClienteAdapter.Modify(oCliente);
         }
 
-        public void Delete(int oID)
+        private void Delete(string oID)
         {
             ClienteAdapter.Delete(oID);
         }

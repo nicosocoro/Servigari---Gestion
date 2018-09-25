@@ -32,14 +32,51 @@ namespace UI.Desktop.Clientes
             }
         }
 
+        public string ID { get; set; }
+
+        public Utiles.AccionEnum.TipoAccion tipoAccion;
+
         public DatosCliente()
         {
             InitializeComponent();
-
+            btnAceptar.Text = "Agregar";
             CargarListaTXT();
             btn_Inhabilitado(btnAceptar);
 
             lblError.ForeColor = rojo_error;
+        }
+
+        public DatosCliente(Utiles.AccionEnum.TipoAccion oTipoAccion)
+            : this()
+        {
+            tipoAccion = oTipoAccion;
+        }
+
+        public DatosCliente(ClientesEntity oCliente, Utiles.AccionEnum.TipoAccion oTipoAccion)
+            : this(oTipoAccion)
+        {
+            txtNombre.Text = oCliente.Nombre;
+            txtApellido.Text = oCliente.Apellido;
+            txtFijo.Text = oCliente.TelefonoFijo;
+            txtCelular.Text = oCliente.TelefonoCelular;
+            txtCelAlternativo.Text = oCliente.TelefonoAlternativo;
+            txtDireccion.Text = oCliente.Direccion;
+            txtComentarios.Text = oCliente.Comentarios;
+
+            switch (tipoAccion)
+            {
+                case Utiles.AccionEnum.TipoAccion.Consult:
+                    EnableTextBox(false);
+                    btnAceptar.Visible = false;
+                    break;
+
+                case Utiles.AccionEnum.TipoAccion.Modify:
+                    EnableTextBox(true);
+                    btnAceptar.Text = "Editar";
+                    btn_Habilitado(btnAceptar);
+                    ID = oCliente.ID;
+                    break;
+            }
         }
 
         private void CargarListaTXT()
@@ -58,13 +95,16 @@ namespace UI.Desktop.Clientes
 
         private void textbox_Changed(object sender, EventArgs e)
         {
-            if (ValidarTXT(listTextbox))
+            if (tipoAccion == Utiles.AccionEnum.TipoAccion.Add || tipoAccion == Utiles.AccionEnum.TipoAccion.Modify)
             {
-                btn_Habilitado(btnAceptar);
-                lblError.Visible = false;
+                if (ValidarTXT(listTextbox))
+                {
+                    btn_Habilitado(btnAceptar);
+                    lblError.Visible = false;
+                }
+                else
+                    btn_Inhabilitado(btnAceptar);
             }
-            else
-                btn_Inhabilitado(btnAceptar);
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -80,12 +120,18 @@ namespace UI.Desktop.Clientes
                     cli.Apellido = txtApellido.Text;
                     cli.Direccion = txtDireccion.Text;
                     cli.TelefonoFijo = txtFijo.Text;
-                    cli.TelefonoCeluar = txtCelular.Text;
+                    cli.TelefonoCelular = txtCelular.Text;
                     cli.TelefonoAlternativo = txtCelAlternativo.Text;
                     cli.Comentarios = txtComentarios.Text;
-                    cli.FechaAlta = DateTime.Now;
+                    cli.FechaAlta = DateTime.Now.ToString();
 
-                    cliLogic.Save(cli, Utiles.AccionEnum.TipoAccion.Add);
+                    if (tipoAccion == Utiles.AccionEnum.TipoAccion.Add)
+                        cli.ID = CliLogic.GetLastID();
+
+                    if (tipoAccion == Utiles.AccionEnum.TipoAccion.Modify)
+                        cli.ID = ID;
+
+                    cliLogic.Save(cli, tipoAccion);
                 }
             }
 
@@ -93,6 +139,23 @@ namespace UI.Desktop.Clientes
             {
                 throw ex;
             }
+
+            finally
+            {
+                CloseForm(this);
+                CargarListaTXT();
+            }
+        }
+
+        private void EnableTextBox(bool oBand)
+        {
+            txtNombre.Enabled = oBand;
+            txtApellido.Enabled = oBand;
+            txtFijo.Enabled = oBand;
+            txtCelular.Enabled = oBand;
+            txtCelAlternativo.Enabled = oBand;
+            txtDireccion.Enabled = oBand;
+            txtComentarios.Enabled = oBand;
         }
     }
 }

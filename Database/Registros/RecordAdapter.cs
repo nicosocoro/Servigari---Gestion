@@ -25,10 +25,10 @@ namespace Database
 
         public DataTable GetIngresos()
         {
-            this.ds = new DataSet();
-
             try
             {
+                this.ds = new DataSet();
+
                 string appSettings = ConfigurationManager.AppSettings["connectionIngresos"];
                 this.ds.ReadXml(appSettings);
             }

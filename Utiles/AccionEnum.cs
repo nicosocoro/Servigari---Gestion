@@ -12,7 +12,8 @@ namespace Utiles
         {
             Add,
             Delete,
-            Modify
+            Modify,
+            Consult
         }
     }
 }
