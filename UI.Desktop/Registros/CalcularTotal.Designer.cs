@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Bussiness.Logic.Clientes.ClienteLogic clienteLogic1 = new Bussiness.Logic.Clientes.ClienteLogic();
+            Database.Clientes.ClientesAdapter clientesAdapter1 = new Database.Clientes.ClientesAdapter();
             Bussiness.Logic.IngresoLogic ingresoLogic1 = new Bussiness.Logic.IngresoLogic();
             this.ddlMeses = new System.Windows.Forms.ComboBox();
             this.lblTittleCalculo = new System.Windows.Forms.Label();
@@ -93,18 +95,18 @@
             // txtTotal
             // 
             this.txtTotal.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.txtTotal.Location = new System.Drawing.Point(648, 182);
+            this.txtTotal.Location = new System.Drawing.Point(92, 184);
             this.txtTotal.Margin = new System.Windows.Forms.Padding(4);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
-            this.txtTotal.Size = new System.Drawing.Size(99, 22);
+            this.txtTotal.Size = new System.Drawing.Size(312, 22);
             this.txtTotal.TabIndex = 14;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(580, 182);
+            this.label2.Location = new System.Drawing.Point(33, 184);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 20);
@@ -113,10 +115,10 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(33, 174);
+            this.btnVolver.Location = new System.Drawing.Point(648, 176);
             this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(100, 28);
+            this.btnVolver.Size = new System.Drawing.Size(154, 28);
             this.btnVolver.TabIndex = 16;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -153,7 +155,7 @@
             this.btnTotal.Location = new System.Drawing.Point(648, 117);
             this.btnTotal.Margin = new System.Windows.Forms.Padding(4);
             this.btnTotal.Name = "btnTotal";
-            this.btnTotal.Size = new System.Drawing.Size(100, 26);
+            this.btnTotal.Size = new System.Drawing.Size(154, 26);
             this.btnTotal.TabIndex = 19;
             this.btnTotal.Text = "Total";
             this.btnTotal.UseVisualStyleBackColor = false;
@@ -182,7 +184,13 @@
             this.lblAño.Text = "Año";
             // 
             // CalcularTotal
-            //            
+            // 
+            clienteLogic1._RecordManejador = null;
+            clienteLogic1._TiposManejador = null;
+            clienteLogic1.ClienteAdapter = clientesAdapter1;
+            this._CliLogic = clienteLogic1;
+            ingresoLogic1._RecordManejador = null;
+            ingresoLogic1._TiposManejador = null;
             this._IngLogic = ingresoLogic1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

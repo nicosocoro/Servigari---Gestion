@@ -14,6 +14,7 @@ namespace UI.Desktop.Clientes
 {
     public partial class DatosCliente : Form1
     {
+        #region PROPIEDADES
         private List<TextBox> listTextbox;
         private ClienteLogic _cliLogic;
         public ClienteLogic cliLogic
@@ -33,9 +34,11 @@ namespace UI.Desktop.Clientes
         }
 
         public string ID { get; set; }
-
         public Utiles.AccionEnum.TipoAccion tipoAccion;
+        #endregion
 
+        #region EVENTOS
+        //CONSTRUCTORES
         public DatosCliente()
         {
             InitializeComponent();
@@ -79,34 +82,7 @@ namespace UI.Desktop.Clientes
             }
         }
 
-        private void CargarListaTXT()
-        {
-            listTextbox = new List<TextBox> { txtNombre, txtApellido };
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            if (btnHabilitado)
-                ConfirmCloseForm("¿Estás seguro que desea salir? ¡Se perderán todos los datos!");
-
-            else
-                this.Close();
-        }
-
-        private void textbox_Changed(object sender, EventArgs e)
-        {
-            if (tipoAccion == Utiles.AccionEnum.TipoAccion.Add || tipoAccion == Utiles.AccionEnum.TipoAccion.Modify)
-            {
-                if (ValidarTXT(listTextbox))
-                {
-                    btn_Habilitado(btnAceptar);
-                    lblError.Visible = false;
-                }
-                else
-                    btn_Inhabilitado(btnAceptar);
-            }
-        }
-
+        //BOTONES
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             try
@@ -147,6 +123,31 @@ namespace UI.Desktop.Clientes
             }
         }
 
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            if (btnHabilitado)
+                ConfirmCloseForm("¿Estás seguro que desea salir? ¡Se perderán todos los datos!");
+
+            else
+                this.Close();
+        }
+        #endregion
+
+        #region FUNCIONES
+        private void textbox_Changed(object sender, EventArgs e)
+        {
+            if (tipoAccion == Utiles.AccionEnum.TipoAccion.Add || tipoAccion == Utiles.AccionEnum.TipoAccion.Modify)
+            {
+                if (ValidarTXT(listTextbox))
+                {
+                    btn_Habilitado(btnAceptar);
+                    lblError.Visible = false;
+                }
+                else
+                    btn_Inhabilitado(btnAceptar);
+            }
+        }
+
         private void EnableTextBox(bool oBand)
         {
             txtNombre.Enabled = oBand;
@@ -157,5 +158,11 @@ namespace UI.Desktop.Clientes
             txtDireccion.Enabled = oBand;
             txtComentarios.Enabled = oBand;
         }
+
+        private void CargarListaTXT()
+        {
+            listTextbox = new List<TextBox> { txtNombre, txtApellido };
+        }
+        #endregion
     }
 }

@@ -42,6 +42,15 @@ namespace UI.Desktop
                 return _CliLogic;
             }
         }
+
+
+        public int Mes_Actual
+        {
+            get
+            {
+                return DateTime.Now.Month;
+            }
+        }
         #endregion
 
         #region Colores        

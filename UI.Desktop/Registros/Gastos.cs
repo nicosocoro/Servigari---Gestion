@@ -17,13 +17,26 @@ namespace UI.Desktop
         public Gastos()
         {
             InitializeComponent();
-            ListarGastos();
+            dgvGastos.AutoGenerateColumns = false;
+
+            ddlMeses.DataSource = Utiles.Calendario.GetMeses_DT();
+            ddlMeses.DisplayMember = "Mes";
+            ddlMeses.ValueMember = "ID";
+            ddlMeses.SelectedIndex = Mes_Actual;
+            ddlMeses.SelectedValue = Mes_Actual;
+
+            ListarGastos(Mes_Actual);
         }
 
-        private void ListarGastos()
+        private void ListarGastos(int oMes)
         {
             this.ddlTipo.DataSource = IngLogic.GetTipos(true);
-            dgvGastos.DataSource = IngLogic.GetGastos();
+
+            ddlClientes.DataSource = IngLogic.GetClientes();
+            ddlClientes.DisplayMember = "Nombre_Apellido";
+            ddlClientes.ValueMember = "ID";
+
+            dgvGastos.DataSource = IngLogic.GetGastos(oMes.ToString());
         }
 
         private void lblIngreso_Click(object sender, EventArgs e)
@@ -41,6 +54,7 @@ namespace UI.Desktop
             montoEntity.Descripcion = txtDescripcionGasto.Text;
             montoEntity.Monto = txtGasto.Text;
             montoEntity.Tipo = ddlTipo.SelectedItem.ToString();
+            montoEntity.ID_Cliente = ddlClientes.SelectedValue.ToString();
 
             error = Utiles.Validaciones.ValidarCampos(montoEntity.Descripcion, montoEntity.Monto);
 
@@ -51,7 +65,7 @@ namespace UI.Desktop
                 txtDescripcionGasto.Clear();
                 txtGasto.Clear();
 
-                ListarGastos();
+                ListarGastos(Mes_Actual);
             }
 
             else
@@ -74,7 +88,7 @@ namespace UI.Desktop
                 CambiarDatos cambiarDatos = new CambiarDatos(montoEntity);
                 cambiarDatos.ShowDialog();
 
-                this.ListarGastos();
+                this.ListarGastos(Mes_Actual);
             }
         }
 
@@ -93,7 +107,7 @@ namespace UI.Desktop
             {
                 case DialogResult.Yes:
                     IngLogic.Save(montoEntity, Utiles.AccionEnum.TipoAccion.Delete);
-                    ListarGastos();
+                    ListarGastos(Mes_Actual);
                     break;
 
                 case DialogResult.Cancel:
@@ -136,9 +150,12 @@ namespace UI.Desktop
 
         }
 
-        private void dgvGastos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void ddlMeses_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var mes = ddlMeses.SelectedIndex;
 
+            if (mes > 0)
+                ListarGastos(mes + 1);
         }
     }
 }

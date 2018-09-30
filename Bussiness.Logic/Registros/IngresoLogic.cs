@@ -9,7 +9,7 @@ using System.Data;
 
 namespace Bussiness.Logic
 {
-    public class IngresoLogic: LogicBase
+    public class IngresoLogic : LogicBase
     {
         #region Registros
         public DataTable GetIngresos()
@@ -17,10 +17,128 @@ namespace Bussiness.Logic
             return RecordManejador.GetIngresos();
         }
 
+        public DataTable GetIngresos(string oMes)
+        {
+            var dt = GetIngresos_Clientes();
+
+            GetRegistro_Mes(dt, oMes);
+
+            return dt;            
+        }
+
+        public DataTable GetIngresos_Clientes()
+        {
+            DataTable dtIngresos = GetIngresos();
+            //DataTable dtClientes = GetClientes();
+
+            Clientes.ClienteLogic cliLogic = new Clientes.ClienteLogic();
+
+            dtIngresos.Columns.Add("Nombre_Apellido", typeof(string));
+
+            int cliID = dtIngresos.Columns.IndexOf("ID_Cliente");
+            int cli_Nombre = dtIngresos.Columns.IndexOf("Nombre_Apellido");
+
+            foreach (DataRow dr in dtIngresos.Rows)
+            {
+                string ID_Cli = dr[cliID].ToString();
+                ClientesEntity cli = cliLogic.GetCliente_ID(ID_Cli);
+
+                dr[cli_Nombre] = cli.Apellido + ", " + cli.Nombre;
+            }
+
+            return dtIngresos;
+        }
+
+        public void GetRegistro_Mes(DataTable dt, string oMes)
+        {
+            if (oMes.Length == 1)
+                oMes = "0" + oMes;
+
+            for(var i = dt.Rows.Count - 1; i >= 0 ; i--)
+            {
+                DataRow row = dt.Rows[i];
+                string dr_mes = row[3].ToString();
+                string mes_dt = dr_mes.Substring(3, 2);
+
+                if (mes_dt != oMes)
+                {
+                    dt.Rows[i].Delete();
+                }
+            }
+
+            dt.AcceptChanges();
+            //foreach(DataRow dr in dt.Rows)
+            //{
+            //    string dr_mes = dr[3].ToString();
+            //    string mes_dt = dr_mes.Substring(3,2);
+
+            //    if (mes_dt != oMes)
+            //    {
+            //        dt.Rows.Remove(dr);                    
+            //    }
+            //}
+        }
+
         public DataTable GetGastos()
         {
             return RecordManejador.GetGastos();
-        }     
+        }
+
+        public DataTable GetGastos(string oMes)
+        {
+            var dt = GetGastos_Clientes();
+
+            GetRegistro_Mes(dt, oMes);
+
+            return dt;
+        }
+
+        public DataTable GetGastos_Clientes()
+        {
+            DataTable dtGastos = GetGastos();
+            //DataTable dtClientes = GetClientes();
+
+            Clientes.ClienteLogic cliLogic = new Clientes.ClienteLogic();
+
+            dtGastos.Columns.Add("Nombre_Apellido", typeof(string));
+
+            int cliID = dtGastos.Columns.IndexOf("ID_Cliente");
+            int cli_Nombre = dtGastos.Columns.IndexOf("Nombre_Apellido");
+
+            foreach (DataRow dr in dtGastos.Rows)
+            {
+                string ID_Cli = dr[cliID].ToString();
+                ClientesEntity cli = cliLogic.GetCliente_ID(ID_Cli);
+
+                dr[cli_Nombre] = cli.Apellido + ", " + cli.Nombre;
+            }
+
+            return dtGastos;
+        }
+        
+        public DataTable GetClientes()
+        {
+            Clientes.ClienteLogic cliLogic = new Clientes.ClienteLogic();
+            DataTable dtClientes = cliLogic.GetClientes();
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID", typeof(string));
+            dt.Columns.Add("Nombre_Apellido", typeof(string));
+
+            dt.Rows.Add("0", "PROPIO");
+
+            foreach (DataRow dr in dtClientes.Rows)
+            {
+                DataRow drNew = dt.NewRow();
+
+                drNew[0] = dr[0];
+                drNew[1] = dr[1] + " " + dr[2];
+
+                dt.Rows.Add(drNew);
+            }
+
+            return dt;
+        }
 
         public void AddRowIngresos(MontoEntities montoEntity, string filePath)
         {

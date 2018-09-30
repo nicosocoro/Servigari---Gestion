@@ -180,6 +180,7 @@ namespace Database
             XmlNode monto = doc.CreateElement("Monto");
             XmlNode fecha = doc.CreateElement("Fecha");
             XmlNode tipo = doc.CreateElement("Tipo");
+            XmlNode id_cliente = doc.CreateElement("ID_Cliente");
 
             //se asignan los valores dentro de las etiquetas
             //por ejemplo, <ID>***</ID> --> toma el valor ***montoEntity.ID.ToString();
@@ -188,6 +189,7 @@ namespace Database
             monto.InnerText = montoEntity.Monto;
             fecha.InnerText = montoEntity.Fecha.ToString();
             tipo.InnerText = montoEntity.Tipo;
+            id_cliente.InnerText = montoEntity.ID_Cliente;
 
             //se anidan los nodos dentro de ingreso
             Ingreso.AppendChild(ID);
@@ -195,6 +197,7 @@ namespace Database
             Ingreso.AppendChild(monto);
             Ingreso.AppendChild(fecha);
             Ingreso.AppendChild(tipo);
+            Ingreso.AppendChild(id_cliente);
 
             //se anida el nodo <ingreso></ingreso> dentro del documento
             doc.DocumentElement.AppendChild(Ingreso);

@@ -17,13 +17,25 @@ namespace UI.Desktop
         public Ingresos()
         {
             InitializeComponent();
-            ListarIngresos();
-        }
+            dgvIngresos.AutoGenerateColumns = false;            
 
-        private void ListarIngresos()
+            ddlMeses.DataSource = Utiles.Calendario.GetMeses_DT();
+            ddlMeses.DisplayMember = "Mes";
+            ddlMeses.ValueMember = "ID";
+            ddlMeses.SelectedIndex = Mes_Actual;
+            ddlMeses.SelectedValue = Mes_Actual;
+
+            ListarIngresos(Mes_Actual);
+        }
+        
+        private void ListarIngresos(int oMes)
         {
             this.ddlTipo.DataSource = IngLogic.GetTipos(true);
-            dgvIngresos.DataSource = IngLogic.GetIngresos();
+            ddlClientes.DataSource = IngLogic.GetClientes();
+            ddlClientes.DisplayMember = "Nombre_Apellido";
+            ddlClientes.ValueMember = "ID";
+            
+            dgvIngresos.DataSource = IngLogic.GetIngresos(oMes.ToString());
         }
 
         private void lblIngreso_Click(object sender, EventArgs e)
@@ -41,6 +53,7 @@ namespace UI.Desktop
             montoEntity.Descripcion = Utiles.FirstToUpper.ToUpper(txtDescripcionIngreso.Text);
             montoEntity.Monto = txtIngreso.Text;
             montoEntity.Tipo = ddlTipo.SelectedItem.ToString();
+            montoEntity.ID_Cliente = ddlClientes.SelectedValue.ToString();
 
             error = Utiles.Validaciones.ValidarCampos(montoEntity.Descripcion, montoEntity.Monto);
 
@@ -56,7 +69,7 @@ namespace UI.Desktop
                 txtDescripcionIngreso.Clear();
                 txtIngreso.Clear();
 
-                ListarIngresos();
+                ListarIngresos(DateTime.Now.Month);
             }
 
             else
@@ -79,7 +92,7 @@ namespace UI.Desktop
                 CambiarDatos cambiarDatos = new CambiarDatos(montoEntity);
                 cambiarDatos.ShowDialog();
 
-                this.ListarIngresos();
+                this.ListarIngresos(DateTime.Now.Month);
             }
         }
 
@@ -98,7 +111,7 @@ namespace UI.Desktop
             {
                 case DialogResult.Yes:
                     IngLogic.Save(montoEntity, Utiles.AccionEnum.TipoAccion.Delete);
-                    ListarIngresos();
+                    ListarIngresos(DateTime.Now.Month);
                     break;
 
                 case DialogResult.Cancel:
@@ -108,12 +121,12 @@ namespace UI.Desktop
 
         private void btnActualizarIngresos_Click(object sender, EventArgs e)
         {
-            this.ListarIngresos();
+            this.ListarIngresos(DateTime.Now.Month);
         }
 
         private void CambiarDatos_FormClosing(object sender, FormClosedEventArgs e)
         {
-            this.ListarIngresos();
+            this.ListarIngresos(DateTime.Now.Month);
         }
 
         private void btnVolverIngreso_Click(object sender, EventArgs e)
@@ -148,6 +161,14 @@ namespace UI.Desktop
 
         private void txtDescripcionIngreso_TextChanged(object sender, EventArgs e)
         {
+        }
+
+        private void ddlMeses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var mes = ddlMeses.SelectedIndex;
+
+            if(mes > 0)
+                ListarIngresos(mes+1);
         }
     }
 }

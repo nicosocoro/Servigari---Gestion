@@ -13,6 +13,7 @@ namespace Bussines.Entities
         public string Monto { get; set; }
         public DateTime Fecha { get; set; }
         public string Tipo { get; set; }
+        public string ID_Cliente { get; set; }
         public TipoMonto TipoMonto { get; set; }
 
         public MontoEntities()

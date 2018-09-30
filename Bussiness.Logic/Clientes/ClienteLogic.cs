@@ -31,7 +31,7 @@ namespace Bussiness.Logic.Clientes
         public ClientesEntity GetCliente_ID(string oID)
         {
             ClientesEntity cli = new ClientesEntity();
-            DataTable dtClientes = ClienteAdapter.GetClientes();
+            DataTable dtClientes = ClienteAdapter.GetAllClientes();
 
             foreach (DataRow dr in dtClientes.Rows)
             {

@@ -32,6 +32,25 @@ namespace Database.Clientes
             return (id + 1).ToString();
         }
 
+        public DataTable GetAllClientes()
+        {
+            try
+            {
+                this.ds = new DataSet();
+
+                string appSettings = ConfigurationManager.AppSettings["connectionClientes"];
+                this.ds.ReadXml(appSettings);
+            }
+
+            catch (ConfigurationErrorsException ex)
+            {
+                throw ex;
+            }
+
+            DataTable dt = this.ds.Tables["cliente"];
+            return dt;
+        }
+
         public DataTable GetClientes()
         {
             try
@@ -47,7 +66,23 @@ namespace Database.Clientes
                 throw ex;
             }
 
-            return this.ds.Tables["cliente"];
+            DataTable dt = this.ds.Tables["cliente"];
+            Limpiar_dt_Clientes(dt);
+
+            return dt;
+        }
+
+        public void Limpiar_dt_Clientes(DataTable dt)
+        {
+            int id = dt.Columns.IndexOf("ID");
+            foreach(DataRow dr in dt.Rows)
+            {
+                if (dr[id].ToString() == "0")
+                {
+                    dr.Delete();
+                    break;
+                }
+            }
         }
 
         #region METODOS SAVE
